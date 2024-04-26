@@ -1,17 +1,25 @@
 package com.grapevineindustries.easyweather
 
+import androidx.compose.ui.test.assertIsDisplayed
+import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithTag
+import org.junit.Rule
 import org.junit.Test
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
 
-import org.junit.Assert.*
-
-/**
- * Example local unit test, which will execute on the development machine (host).
- *
- * See [testing documentation](http://d.android.com/tools/testing).
- */
+@RunWith(RobolectricTestRunner::class)
 class ExampleUnitTest {
+    @get:Rule
+    val composeTestRule = createComposeRule()
+
     @Test
-    fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+    fun displayScreen() {
+        composeTestRule.setContent {
+            HomeScreen()
+        }
+
+        composeTestRule.onNodeWithTag("Stuff")
+            .assertIsDisplayed()
     }
 }
