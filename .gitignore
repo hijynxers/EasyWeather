@@ -13,5 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
-
-app/src/main/SpecialKey.kt
+/app/src/main/java/com/grapevineindustries/easyweather/SpecialKey.kt
