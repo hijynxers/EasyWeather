@@ -72,6 +72,7 @@ dependencies {
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.glide)
     implementation(libs.glide.compose)
+    implementation(libs.logging.interceptor)
 
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
@@ -79,7 +80,6 @@ dependencies {
     testImplementation(libs.androidx.ui.test.junit4)
     testImplementation(libs.mockito.android)
     testImplementation(libs.mockito.kotlin)
-    testImplementation(libs.okhttp3.logging.interceptor)
     testImplementation(libs.kotlinx.coroutines.test.jvm)
     testImplementation(libs.kotlinx.coroutines.test)
 
