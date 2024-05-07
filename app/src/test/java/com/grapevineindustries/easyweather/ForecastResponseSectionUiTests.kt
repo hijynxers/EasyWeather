@@ -8,26 +8,29 @@ import com.grapevineindustries.easyweather.ForecastSectionTestTags.FORECAST_DAY
 import com.grapevineindustries.easyweather.ForecastSectionTestTags.FORECAST_HIGH_LOW
 import com.grapevineindustries.easyweather.ForecastSectionTestTags.FORECAST_ICON
 import com.grapevineindustries.easyweather.data.Forecast
+import com.grapevineindustries.easyweather.data.ForecastDay
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 
 @RunWith(RobolectricTestRunner::class)
-class ForecastSectionUiTests {
+class ForecastResponseSectionUiTests {
 
     @get:Rule
     val composeTestRule = createComposeRule()
 
-    private val forecasts = listOf(
-        Forecast(icon = "", day = "Tuesday", high = 87, low = 57),
-        Forecast(icon = "", day = "Wednesday", high = 87, low = 57),
-        Forecast(icon = "", day = "Thursday", high = 87, low = 57),
+    private val forecast = Forecast(
+        arrayListOf(
+            ForecastDay(date = "2024-04-15"),
+            ForecastDay(date = "2024-04-16"),
+            ForecastDay(date = "2024-04-17"),
+        )
     )
 
     private fun launchWithCompose() {
         composeTestRule.setContent {
-            ForecastSection(forecasts)
+            ForecastSection(forecast)
         }
     }
 
@@ -39,12 +42,12 @@ class ForecastSectionUiTests {
         val days = composeTestRule.onAllNodesWithTag(FORECAST_DAY)
         val highLows = composeTestRule.onAllNodesWithTag(FORECAST_HIGH_LOW)
 
-        forecasts.forEachIndexed { index, forecast ->
+        forecast.forecastday.forEachIndexed { index, forecast ->
             icons[index].assertIsDisplayed()
             days[index].assertIsDisplayed()
-                .assertTextEquals(forecast.day)
+                .assertTextEquals(forecast.date)
             highLows[index].assertIsDisplayed()
-                .assertTextEquals("${forecast.high} / ${forecast.low}")
+                .assertTextEquals("${forecast.day.maxtemp_f} / ${forecast.day.mintemp_f}")
         }
     }
 }

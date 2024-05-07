@@ -8,6 +8,7 @@ import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.performClick
 import com.grapevineindustries.easyweather.HomeScreenTestTags.WEATHER_API_LINK
+import com.grapevineindustries.easyweather.data.CurrentWeatherResponse
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -24,7 +25,11 @@ class HomeScreenUiTests {
         composeTestRule.setContent {
             uriHandler = LocalUriHandler.current
 
-            HomeScreenContent()
+            HomeScreenContent(
+                current = CurrentWeatherResponse(),
+                forecast = expectedForecast,
+                isFinishedLoading = true
+            )
         }
     }
 

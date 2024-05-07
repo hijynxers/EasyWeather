@@ -10,6 +10,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalUriHandler
 import androidx.compose.ui.platform.testTag
@@ -19,20 +21,33 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.grapevineindustries.easyweather.HomeScreenTestTags.WEATHER_API_LINK
-import com.grapevineindustries.easyweather.data.Forecast
+import com.grapevineindustries.easyweather.data.CurrentWeatherResponse
+import com.grapevineindustries.easyweather.data.ForecastResponse
+import com.grapevineindustries.easyweather.data.HomeViewModel
 import com.grapevineindustries.easyweather.ui.theme.EasyWeatherTheme
 
 @Preview(showSystemUi = true)
 @Composable
 fun HomeScreenContentPreview() {
     EasyWeatherTheme {
-        HomeScreenContent()
+        HomeScreenContent(
+            current = CurrentWeatherResponse(),
+            forecast = ForecastResponse(),
+            isFinishedLoading = true
+        )
     }
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun HomeScreen(
+    viewModel: HomeViewModel = HomeViewModel()
+) {
+    LaunchedEffect(Unit) {
+        viewModel.fetchCurrentWeather()
+        viewModel.fetchForecast()
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -46,27 +61,31 @@ fun HomeScreen() {
                 modifier = Modifier.padding(paddingValues)
 
             ) {
-                HomeScreenContent()
+                HomeScreenContent(
+                    current = viewModel.weather.collectAsState().value,
+                    forecast = viewModel.forecast.collectAsState().value,
+                    isFinishedLoading = viewModel.isFinishedLoading.collectAsState().value
+                )
             }
         }
     )
 }
 
 @Composable
-fun HomeScreenContent() {
+fun HomeScreenContent(
+    current: CurrentWeatherResponse,
+    forecast: ForecastResponse,
+    isFinishedLoading: Boolean,
+) {
     val uriHandler = LocalUriHandler.current
 
     Column(
         modifier = Modifier.padding(horizontal = 16.dp)
     ) {
-        CurrentWeatherSection()
-        ForecastSection(
-            forecasts = listOf(
-                Forecast(),
-                Forecast(),
-                Forecast(),
-            )
-        )
+        if (isFinishedLoading) {
+            CurrentWeatherSection(current)
+            ForecastSection(forecast.forecast)
+        }
 
         Row(
             modifier = Modifier

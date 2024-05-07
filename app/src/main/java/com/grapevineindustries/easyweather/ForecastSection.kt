@@ -21,10 +21,11 @@ import com.grapevineindustries.easyweather.ForecastSectionTestTags.FORECAST_DAY
 import com.grapevineindustries.easyweather.ForecastSectionTestTags.FORECAST_HIGH_LOW
 import com.grapevineindustries.easyweather.ForecastSectionTestTags.FORECAST_ICON
 import com.grapevineindustries.easyweather.data.Forecast
+import com.grapevineindustries.easyweather.data.ForecastDay
 
 @Composable
-fun ForecastSection(forecasts: List<Forecast>) {
-    Column{
+fun ForecastSection(forecast: Forecast) {
+    Column {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
@@ -40,9 +41,9 @@ fun ForecastSection(forecasts: List<Forecast>) {
                         .fillMaxWidth()
                         .background(Color.Cyan)
                 )
-                ForecastRow(forecasts[0])
-                ForecastRow(forecasts[1])
-                ForecastRow(forecasts[2])
+                forecast.forecastday.forEach { item ->
+                    ForecastRow(forecast = item)
+                }
             }
 
         }
@@ -50,7 +51,7 @@ fun ForecastSection(forecasts: List<Forecast>) {
 }
 
 @Composable
-fun ForecastRow(forecast: Forecast) {
+fun ForecastRow(forecast: ForecastDay) {
     Row {
         Image(
             modifier = Modifier.testTag(FORECAST_ICON),
@@ -59,14 +60,14 @@ fun ForecastRow(forecast: Forecast) {
         )
         Text(
             modifier = Modifier.testTag(FORECAST_DAY),
-            text = forecast.day
+            text = forecast.date
         )
 
         Spacer(modifier = Modifier.width(60.dp))
 
         Text(
             modifier = Modifier.testTag(FORECAST_HIGH_LOW),
-            text = "${forecast.high} / ${forecast.low}"
+            text = "${forecast.day.maxtemp_f} / ${forecast.day.mintemp_f}"
         )
     }
 }
