@@ -71,6 +71,7 @@ dependencies {
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.test.jvm)
+    implementation(libs.kotlinx.coroutines.test)
     implementation(libs.glide)
     implementation(libs.glide.compose)
 
