@@ -8,7 +8,13 @@ data class CurrentWeatherResponse(
 }
 
 data class ForecastResponse(
-    val forecastDay: ForecastDay = ForecastDay(),
+    val location: Location = Location(),
+    val current: Current = Current(),
+    val forecast: Forecast = Forecast()
+)
+
+data class Forecast(
+    val forecastday: ArrayList<ForecastDay> = arrayListOf(),
 ) {
     companion object
 }
@@ -17,7 +23,7 @@ data class ForecastDay(
     val date: String = "",
     val day: Day = Day(),
     val astro: Astro = Astro(),
-    val hour: Hour = Hour()
+    val hour: ArrayList<Hour> = arrayListOf()
 ) {
     companion object
 }
