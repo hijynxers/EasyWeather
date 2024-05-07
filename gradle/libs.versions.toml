@@ -1,15 +1,15 @@
 [versions]
 agp = "8.3.2"
 kotlin = "1.9.0"
-coreKtx = "1.13.0"
+coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.7.0"
 lifecycleViewmodelCompose = "2.7.0"
 activityCompose = "1.9.0"
-composeBom = "2024.04.01"
-runtimeLivedata = "1.6.6"
+composeBom = "2024.05.00"
+runtimeLivedata = "1.6.7"
 robolectric = "4.12"
 retrofit2 = "2.9.0"
 kotlinx-coroutines-android = "1.7.3"
@@ -17,6 +17,7 @@ glide = "4.14.2"
 glideCompose = "1.0.0-beta01"
 mockito = "5.5.0"
 mockitoKotlin = "5.1.0"
+okhttpLogging = "4.9.3"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -45,7 +46,7 @@ glide = { group = "com.github.bumptech.glide", name = "glide", version.ref = "gl
 glide-compose = { group = "com.github.bumptech.glide", name = "compose", version.ref = "glideCompose" }
 mockito-android = { group = "org.mockito", name = "mockito-android", version.ref = "mockito" }
 mockito-kotlin = { group = "org.mockito.kotlin", name = "mockito-kotlin", version.ref = "mockitoKotlin" }
-
+okhttp3-logging-interceptor = { group = "com.squareup.okhttp3", name = "logging-interceptor", version.ref = "okhttpLogging" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

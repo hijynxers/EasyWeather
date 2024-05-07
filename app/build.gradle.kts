@@ -70,8 +70,6 @@ dependencies {
     implementation(libs.retrofit2.retrofit)
     implementation(libs.retrofit2.converter.gson)
     implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.kotlinx.coroutines.test.jvm)
-    implementation(libs.kotlinx.coroutines.test)
     implementation(libs.glide)
     implementation(libs.glide.compose)
 
@@ -81,6 +79,9 @@ dependencies {
     testImplementation(libs.androidx.ui.test.junit4)
     testImplementation(libs.mockito.android)
     testImplementation(libs.mockito.kotlin)
+    testImplementation(libs.okhttp3.logging.interceptor)
+    testImplementation(libs.kotlinx.coroutines.test.jvm)
+    testImplementation(libs.kotlinx.coroutines.test)
 
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
