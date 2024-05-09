@@ -10,8 +10,8 @@ import com.grapevineindustries.easyweather.data.ForecastDay
 import com.grapevineindustries.easyweather.data.ForecastResponse
 import com.grapevineindustries.easyweather.data.Hour
 import com.grapevineindustries.easyweather.data.Location
-import com.grapevineindustries.easyweather.data.WeatherApi
-import com.grapevineindustries.easyweather.data.WeatherRepository
+import com.grapevineindustries.easyweather.networking.WeatherApi
+import com.grapevineindustries.easyweather.networking.WeatherRepository
 import kotlinx.coroutines.test.runTest
 import org.junit.Test
 import org.mockito.Mockito

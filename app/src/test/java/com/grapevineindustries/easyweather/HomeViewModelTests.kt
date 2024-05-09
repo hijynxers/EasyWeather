@@ -1,7 +1,7 @@
 package com.grapevineindustries.easyweather
 
 import com.grapevineindustries.easyweather.data.HomeViewModel
-import com.grapevineindustries.easyweather.data.WeatherRepository
+import com.grapevineindustries.easyweather.networking.WeatherRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.TestDispatcher
@@ -38,6 +38,7 @@ class HomeViewModelTests {
 
     private val weatherRepository: WeatherRepository = mock()
     private lateinit var homeViewModel: HomeViewModel
+
     @Before
     fun setup() {
         homeViewModel = HomeViewModel(weatherRepository)

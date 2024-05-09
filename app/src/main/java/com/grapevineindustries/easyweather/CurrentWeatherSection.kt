@@ -1,6 +1,5 @@
 package com.grapevineindustries.easyweather
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.material3.MaterialTheme
@@ -8,7 +7,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
-import androidx.compose.ui.res.painterResource
+import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
+import com.bumptech.glide.integration.compose.GlideImage
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.CONDITION_ICON
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.CONDITION_TEXT
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.CURRENT_HIGH
@@ -16,45 +16,54 @@ import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.CURRENT
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.CURRENT_TEMP
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.LOCATION_CITY
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.LOCATION_OTHER
+import com.grapevineindustries.easyweather.data.CurrentWeatherResponse
 
+@OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun CurrentWeatherSection() {
+fun CurrentWeatherSection(
+    weather: CurrentWeatherResponse,
+    highTemp: Float,
+    lowTemp: Float
+) {
+    val degreesF = "\u2109"
+
     Column {
         Text(
             modifier = Modifier.testTag(LOCATION_CITY),
-            text = "St. Charles",
+            text = weather.location.name,
             style = MaterialTheme.typography.headlineMedium
         )
         Text(
             modifier = Modifier.testTag(LOCATION_OTHER),
-            text = "Tuesday, April 12, 4:10 AM"
+            text = weather.location.localtime
+//            text = "Tuesday, April 12, 4:10 AM"
         )
         Row {
             Column {
-                Image( // condition:icon
+                GlideImage(
                     modifier = Modifier.testTag(CONDITION_ICON),
-                    painter = painterResource(id = R.drawable.cloud_24),
+                    model = "https:" + weather.current.condition.icon,
                     contentDescription = null
                 )
                 Text(
                     modifier = Modifier.testTag(CONDITION_TEXT),
-                    text = "Cloudy" // condition:text
+                    text = weather.current.condition.text
                 )
             }
 
-            Text(  // temp_f
+            Text(
                 modifier = Modifier.testTag(CURRENT_TEMP),
-                text = "-8\u2109"
+                text = "${weather.current.temp_f}$degreesF"
             )
 
             Row {
                 Text(
                     modifier = Modifier.testTag(CURRENT_HIGH),
-                    text = "High: 87\u2109"
+                    text = "High: $highTemp$degreesF"
                 )
                 Text(
                     modifier = Modifier.testTag(CURRENT_LOW),
-                    text = "Low: 57\u2109"
+                    text = "Low: $lowTemp$degreesF"
                 )
             }
         }

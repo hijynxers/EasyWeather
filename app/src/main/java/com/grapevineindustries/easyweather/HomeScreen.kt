@@ -83,7 +83,11 @@ fun HomeScreenContent(
         modifier = Modifier.padding(horizontal = 16.dp)
     ) {
         if (isFinishedLoading) {
-            CurrentWeatherSection(current)
+            CurrentWeatherSection(
+                weather = current,
+                highTemp = forecast.forecast.forecastday[0].day.maxtemp_f,
+                lowTemp = forecast.forecast.forecastday[0].day.mintemp_f
+            )
             ForecastSection(forecast.forecast)
         }
 
