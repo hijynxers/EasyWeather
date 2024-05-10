@@ -27,7 +27,7 @@ class CurrentWeatherSectionUiTests {
     private val expectedWeather = CurrentWeatherResponse(
         Location(
             name = "name",
-            localtime = "localtime"
+            localtime = "2024-04-15"
         ),
         Current(
             temp_f = 50f,
@@ -37,6 +37,7 @@ class CurrentWeatherSectionUiTests {
             )
         )
     )
+    private val expectedDate = "Monday"
     private val expectedHighTemp = 90f
     private val expectedLowTemp = 50f
 
@@ -59,7 +60,7 @@ class CurrentWeatherSectionUiTests {
             .assertTextEquals(expectedWeather.location.name)
         composeTestRule.onNodeWithTag(LOCATION_OTHER)
             .assertIsDisplayed()
-            .assertTextEquals(expectedWeather.location.localtime)
+            .assertTextEquals(expectedDate)
 //        composeTestRule.onNodeWithTag(CONDITION_ICON)
 //            .assertIsDisplayed()
         composeTestRule.onNodeWithTag(CONDITION_TEXT)
@@ -67,12 +68,12 @@ class CurrentWeatherSectionUiTests {
             .assertTextEquals(expectedWeather.current.condition.text)
         composeTestRule.onNodeWithTag(CURRENT_TEMP)
             .assertIsDisplayed()
-            .assertTextEquals("${expectedWeather.current.temp_f}\u2109")
+            .assertTextEquals("${expectedWeather.current.temp_f} \u2109")
         composeTestRule.onNodeWithTag(CURRENT_HIGH)
             .assertIsDisplayed()
-            .assertTextEquals("High: ${expectedHighTemp}\u2109")
+            .assertTextEquals("High: $expectedHighTemp \u2109")
         composeTestRule.onNodeWithTag(CURRENT_LOW)
             .assertIsDisplayed()
-            .assertTextEquals("Low: ${expectedLowTemp}\u2109")
+            .assertTextEquals("Low: $expectedLowTemp \u2109")
     }
 }

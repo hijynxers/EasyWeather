@@ -2,11 +2,19 @@ package com.grapevineindustries.easyweather
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
 import com.bumptech.glide.integration.compose.GlideImage
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.CONDITION_ICON
@@ -16,8 +24,36 @@ import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.CURRENT
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.CURRENT_TEMP
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.LOCATION_CITY
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.LOCATION_OTHER
+import com.grapevineindustries.easyweather.data.Condition
+import com.grapevineindustries.easyweather.data.Current
 import com.grapevineindustries.easyweather.data.CurrentWeatherResponse
+import com.grapevineindustries.easyweather.data.Location
 import com.grapevineindustries.easyweather.data.degreesF
+import com.grapevineindustries.easyweather.ui.theme.EasyWeatherTheme
+
+@Preview(showSystemUi = true)
+@Composable
+fun CurrentWeatherSectionPreview() {
+    EasyWeatherTheme {
+        CurrentWeatherSection(
+            weather = CurrentWeatherResponse(
+                location = Location(
+                    name = "Anchorage",
+                    localtime = "2024-04-15 21:58"
+                ),
+                current = Current(
+                    temp_f = 37.4f,
+                    condition = Condition(
+                        text = "Overcast",
+                        icon = "//cdn.weatherapi.com/weather/64x64/day/302.png"
+                    )
+                )
+            ),
+            highTemp = 37.7f,
+            lowTemp = 33.6f,
+        )
+    }
+}
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -26,7 +62,11 @@ fun CurrentWeatherSection(
     highTemp: Float,
     lowTemp: Float
 ) {
-    Column {
+    Column(
+        modifier = Modifier.fillMaxWidth()
+            .padding(top = 16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Text(
             modifier = Modifier.testTag(LOCATION_CITY),
             text = weather.location.name,
@@ -34,37 +74,50 @@ fun CurrentWeatherSection(
         )
         Text(
             modifier = Modifier.testTag(LOCATION_OTHER),
-            text = weather.location.localtime
+            text = formatDate(weather.location.localtime)
 //            text = "Tuesday, April 12, 4:10 AM"
         )
+        GlideImage(
+            modifier = Modifier
+                .testTag(CONDITION_ICON)
+                .defaultMinSize(
+                    minHeight = 100.dp,
+                    minWidth = 100.dp
+                ),
+            model = "https:" + weather.current.condition.icon,
+            contentDescription = null
+        )
+//        Box(
+//            modifier = Modifier
+//                .defaultMinSize(
+//                    minHeight = 100.dp,
+//                    minWidth = 100.dp
+//                )
+//                .background(MaterialTheme.colorScheme.primary)
+//        ) {
+
+//        }
+        Text(
+            modifier = Modifier.testTag(CONDITION_TEXT),
+            text = weather.current.condition.text
+        )
+
+        Text(
+            modifier = Modifier.testTag(CURRENT_TEMP),
+            text = "${weather.current.temp_f} $degreesF",
+            style = MaterialTheme.typography.headlineSmall
+        )
+
         Row {
-            Column {
-                GlideImage(
-                    modifier = Modifier.testTag(CONDITION_ICON),
-                    model = "https:" + weather.current.condition.icon,
-                    contentDescription = null
-                )
-                Text(
-                    modifier = Modifier.testTag(CONDITION_TEXT),
-                    text = weather.current.condition.text
-                )
-            }
-
             Text(
-                modifier = Modifier.testTag(CURRENT_TEMP),
-                text = "${weather.current.temp_f}$degreesF"
+                modifier = Modifier.testTag(CURRENT_HIGH),
+                text = "High: $highTemp $degreesF"
             )
-
-            Row {
-                Text(
-                    modifier = Modifier.testTag(CURRENT_HIGH),
-                    text = "High: $highTemp$degreesF"
-                )
-                Text(
-                    modifier = Modifier.testTag(CURRENT_LOW),
-                    text = "Low: $lowTemp$degreesF"
-                )
-            }
+            Spacer(modifier = Modifier.width(12.dp))
+            Text(
+                modifier = Modifier.testTag(CURRENT_LOW),
+                text = "Low: $lowTemp $degreesF"
+            )
         }
     }
 }

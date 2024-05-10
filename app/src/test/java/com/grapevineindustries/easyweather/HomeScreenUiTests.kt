@@ -27,8 +27,7 @@ class HomeScreenUiTests {
 
             HomeScreenContent(
                 current = CurrentWeatherResponse(),
-                forecast = expectedForecast,
-                isFinishedLoading = true
+                forecast = expectedForecast
             )
         }
     }
