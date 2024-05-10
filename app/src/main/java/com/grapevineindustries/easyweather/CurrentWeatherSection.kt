@@ -17,6 +17,7 @@ import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.CURRENT
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.LOCATION_CITY
 import com.grapevineindustries.easyweather.CurrentWeatherSectionTestTags.LOCATION_OTHER
 import com.grapevineindustries.easyweather.data.CurrentWeatherResponse
+import com.grapevineindustries.easyweather.data.degreesF
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
@@ -25,8 +26,6 @@ fun CurrentWeatherSection(
     highTemp: Float,
     lowTemp: Float
 ) {
-    val degreesF = "\u2109"
-
     Column {
         Text(
             modifier = Modifier.testTag(LOCATION_CITY),
