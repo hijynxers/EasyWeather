@@ -2,19 +2,23 @@ package com.grapevineindustries.easyweather
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.bumptech.glide.integration.compose.ExperimentalGlideComposeApi
@@ -53,7 +57,6 @@ fun ForecastSection(forecast: Forecast) {
         Card(
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp)
         ) {
             Column(
                 modifier = Modifier.padding(16.dp)
@@ -65,45 +68,56 @@ fun ForecastSection(forecast: Forecast) {
                         .fillMaxWidth()
                         .background(MaterialTheme.colorScheme.outline)
                 )
-                forecast.forecastday.forEach { item ->
-                    ForecastRow(forecast = item)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.Absolute.SpaceEvenly
+                ) {
+                    forecast.forecastday.forEach { item ->
+                        ForecastRow(
+                            modifier = Modifier.weight(1f),
+                            forecast = item
+                        )
+                    }
                 }
             }
-
         }
     }
 }
 
 @OptIn(ExperimentalGlideComposeApi::class)
 @Composable
-fun ForecastRow(forecast: ForecastDay) {
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
+fun ForecastRow(
+    modifier: Modifier = Modifier,
+    forecast: ForecastDay
+) {
+    Card(
+        colors = CardDefaults.cardColors(
+            containerColor = MaterialTheme.colorScheme.primaryContainer
+        ),
+        modifier = modifier.padding(8.dp)
     ) {
-        GlideImage(
-            modifier = Modifier.testTag(FORECAST_ICON),
-            model = "https:" + forecast.day.condition.icon,
-            contentDescription = null
-        )
-
-        Text(
+        Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
-                .testTag(FORECAST_DAY)
-                .weight(1f),
-            text = formatDate(forecast.date)
-        )
-
-        Spacer(modifier = Modifier.width(60.dp))
-
-        Row {
-
+                .padding(8.dp)
+                .fillMaxWidth()
+        ) {
+            Text(
+                modifier = Modifier
+                    .testTag(FORECAST_DAY),
+                text = formatDate(forecast.date),
+                fontWeight = FontWeight.Bold
+            )
             Text(
                 modifier = Modifier.testTag(FORECAST_HIGH),
                 text = "${forecast.day.maxtemp_f} $degreesF"
             )
-            Text(
-                text = " / "
+            GlideImage(
+                modifier = Modifier
+                    .testTag(FORECAST_ICON)
+                    .size(50.dp),
+                model = "https:" + forecast.day.condition.icon,
+                contentDescription = null
             )
             Text(
                 modifier = Modifier.testTag(FORECAST_LOW),

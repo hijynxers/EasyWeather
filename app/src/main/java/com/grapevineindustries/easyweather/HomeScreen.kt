@@ -4,7 +4,9 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -90,7 +92,7 @@ fun HomeScreen(
                 }
             )
         },
-        containerColor = MaterialTheme.colorScheme.secondaryContainer,
+        containerColor = MaterialTheme.colorScheme.background,
         content = { paddingValues ->
             Column(
                 modifier = Modifier.padding(paddingValues)
@@ -130,6 +132,7 @@ fun HomeScreenContent(
             highTemp = forecast.forecast.forecastday[0].day.maxtemp_f,
             lowTemp = forecast.forecast.forecastday[0].day.mintemp_f
         )
+        Spacer(modifier = Modifier.height(8.dp))
         ForecastSection(forecast.forecast)
 
         Row(
