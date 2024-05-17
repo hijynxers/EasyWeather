@@ -8,6 +8,8 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
@@ -125,7 +127,9 @@ fun HomeScreenContent(
     val uriHandler = LocalUriHandler.current
 
     Column(
-        modifier = Modifier.padding(horizontal = 16.dp)
+        modifier = Modifier
+            .padding(horizontal = 16.dp)
+            .verticalScroll(rememberScrollState())
     ) {
         CurrentWeatherSection(
             weather = current,
@@ -154,6 +158,8 @@ fun HomeScreenContent(
                 textDecoration = TextDecoration.Underline
             )
         }
+
+        Spacer(Modifier.height(16.dp))
     }
 }
 

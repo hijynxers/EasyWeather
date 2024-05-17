@@ -37,7 +37,7 @@ class CurrentWeatherSectionUiTests {
             )
         )
     )
-    private val expectedDate = "Monday"
+    private val expectedDate = "Monday 4/15"
     private val expectedHighTemp = 90f
     private val expectedLowTemp = 50f
 
@@ -61,8 +61,6 @@ class CurrentWeatherSectionUiTests {
         composeTestRule.onNodeWithTag(LOCATION_OTHER)
             .assertIsDisplayed()
             .assertTextEquals(expectedDate)
-//        composeTestRule.onNodeWithTag(CONDITION_ICON)
-//            .assertIsDisplayed()
         composeTestRule.onNodeWithTag(CONDITION_TEXT)
             .assertIsDisplayed()
             .assertTextEquals(expectedWeather.current.condition.text)

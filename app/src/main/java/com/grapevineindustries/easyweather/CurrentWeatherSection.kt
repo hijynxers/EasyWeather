@@ -3,9 +3,9 @@ package com.grapevineindustries.easyweather
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -63,7 +63,8 @@ fun CurrentWeatherSection(
     lowTemp: Float
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = Modifier
+            .fillMaxWidth()
             .padding(top = 16.dp),
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -74,29 +75,17 @@ fun CurrentWeatherSection(
         )
         Text(
             modifier = Modifier.testTag(LOCATION_OTHER),
-            text = formatDate(weather.location.localtime)
-//            text = "Tuesday, April 12, 4:10 AM"
+            text = formatDate(weather.location.localtime, fullDay = true)
         )
+
         GlideImage(
             modifier = Modifier
                 .testTag(CONDITION_ICON)
-                .defaultMinSize(
-                    minHeight = 100.dp,
-                    minWidth = 100.dp
-                ),
+                .size(100.dp),
             model = "https:" + weather.current.condition.icon,
-            contentDescription = null
+            contentDescription = null,
         )
-//        Box(
-//            modifier = Modifier
-//                .defaultMinSize(
-//                    minHeight = 100.dp,
-//                    minWidth = 100.dp
-//                )
-//                .background(MaterialTheme.colorScheme.primary)
-//        ) {
 
-//        }
         Text(
             modifier = Modifier.testTag(CONDITION_TEXT),
             text = weather.current.condition.text

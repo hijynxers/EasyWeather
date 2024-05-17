@@ -56,7 +56,7 @@ val expectedForecast = ForecastResponse(
     forecast = Forecast(
         forecastday = arrayListOf(
             ForecastDay(
-                date = "date",
+                date = "2024-04-15 00:00",
                 day = Day(
                     maxtemp_c = 1f,
                     maxtemp_f = 2f,
@@ -70,7 +70,7 @@ val expectedForecast = ForecastResponse(
                 ),
                 hour = arrayListOf(
                     Hour(
-                        time = "time",
+                        time = "2024-04-15 00:00",
                         temp_c = 5f,
                         temp_f = 6f,
                         condition = condition
