@@ -23,6 +23,7 @@ import com.grapevineindustries.easyweather.networking.WeatherRepository
 import dagger.hilt.android.testing.BindValue
 import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
+import dagger.hilt.android.testing.HiltTestApplication
 import kotlinx.coroutines.test.runTest
 import org.junit.Before
 import org.junit.Rule
@@ -34,10 +35,9 @@ import org.robolectric.annotation.Config
 
 @HiltAndroidTest
 @RunWith(RobolectricTestRunner::class)
-@Config(application = Application::class)
+@Config(application = HiltTestApplication::class)
 class HomeScreenUiTests {
     private lateinit var uriHandler: UriHandler
-
 
     private var hiltRule = HiltAndroidRule(this)
 
