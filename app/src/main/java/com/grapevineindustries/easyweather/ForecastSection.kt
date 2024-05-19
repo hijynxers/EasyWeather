@@ -90,7 +90,11 @@ fun ForecastSection(forecast: Forecast) {
             Column(
                 modifier = Modifier.padding(16.dp)
             ) {
-                Text(text = "3-Day Forecast")
+                Text(
+                    text = "3-Day Forecast",
+                    style = MaterialTheme.typography.titleLarge,
+                    fontWeight = FontWeight.Bold
+                )
                 Spacer(
                     modifier = Modifier
                         .height(1.dp)
@@ -183,8 +187,8 @@ fun ForecastCard(
 ) {
     Card(
         colors = CardDefaults.cardColors(
-            containerColor = if (isSelected) MaterialTheme.colorScheme.primaryContainer
-            else MaterialTheme.colorScheme.secondaryContainer
+            containerColor = if (isSelected) MaterialTheme.colorScheme.primary
+            else MaterialTheme.colorScheme.primaryContainer
         ),
         modifier = modifier
             .padding(8.dp)
