@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.kapt)
+    alias(libs.plugins.daggerHiltPlugin)
 }
 
 android {
@@ -46,7 +48,7 @@ android {
         compose = true
     }
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
+        kotlinCompilerExtensionVersion = "1.5.8"
     }
     packaging {
         resources {
@@ -73,6 +75,9 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.glide.compose)
     implementation(libs.logging.interceptor)
+    implementation(libs.dagger.hiltAndroid)
+    implementation(libs.androidx.hilt.navigationCompose)
+    kapt(libs.dagger.hiltCompiler)
 
     testImplementation(libs.junit)
     testImplementation(libs.robolectric)
@@ -82,6 +87,7 @@ dependencies {
     testImplementation(libs.mockito.kotlin)
     testImplementation(libs.kotlinx.coroutines.test.jvm)
     testImplementation(libs.kotlinx.coroutines.test)
+    testImplementation(libs.dagger.hiltAndroidTest)
 
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))

@@ -3,16 +3,18 @@ package com.grapevineindustries.easyweather.data
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.grapevineindustries.easyweather.networking.RetrofitInstance.weatherFactory
 import com.grapevineindustries.easyweather.networking.WeatherRepository
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 import kotlin.properties.Delegates
 
-class HomeViewModel(
-    private val repository: WeatherRepository = WeatherRepository(weatherFactory)
+@HiltViewModel
+class HomeViewModel @Inject constructor(
+    private val repository: WeatherRepository
 ) : ViewModel() {
     private var currentWeatherLoaded by Delegates.notNull<Boolean>()
     private var forecastLoaded by Delegates.notNull<Boolean>()

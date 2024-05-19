@@ -92,7 +92,7 @@ class WeatherRepositoryTests {
         runTest {
             Mockito.lenient()
                 .`when`(
-                    weatherApi.fetchCurrentWeather()
+                    weatherApi.fetchCurrentWeather(code = "99501")
                 ) doReturn expectedCurrentWeather
 
             testObject = WeatherRepository(weatherApi)
@@ -106,7 +106,7 @@ class WeatherRepositoryTests {
         runTest {
             Mockito.lenient()
                 .`when`(
-                    weatherApi.fetchForecast()
+                    weatherApi.fetchForecast(code = "99501")
                 ) doReturn expectedForecast
 
             testObject = WeatherRepository(weatherApi)

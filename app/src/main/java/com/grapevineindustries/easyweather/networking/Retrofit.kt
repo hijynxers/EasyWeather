@@ -12,15 +12,11 @@ object RetrofitInstance {
         OkHttpClient.Builder()
             .addNetworkInterceptor(logging)
             .build()
-    private val retrofit: Retrofit by lazy {
+    val retrofit: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(BASE_URL)
             .client(OK_HTTP_CLIENT)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
-
-    val weatherFactory: WeatherApi by lazy {
-        retrofit.create(WeatherApi::class.java)
     }
 }

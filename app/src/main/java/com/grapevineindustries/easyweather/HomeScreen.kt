@@ -37,6 +37,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.grapevineindustries.easyweather.HomeScreenTestTags.ADD_LOCATION_CONFIRM
 import com.grapevineindustries.easyweather.HomeScreenTestTags.ADD_LOCATION_TEXT
 import com.grapevineindustries.easyweather.HomeScreenTestTags.ADD_LOCATION_TEXT_FIELD
@@ -92,7 +93,7 @@ fun HomeScreenContentPreview() {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
-    viewModel: HomeViewModel = HomeViewModel()
+    viewModel: HomeViewModel = hiltViewModel()
 ) {
     LaunchedEffect(Unit) {
         viewModel.fetchCurrentWeather()
