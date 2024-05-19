@@ -88,6 +88,7 @@ dependencies {
     testImplementation(libs.kotlinx.coroutines.test.jvm)
     testImplementation(libs.kotlinx.coroutines.test)
     testImplementation(libs.dagger.hiltAndroidTest)
+    kaptTest(libs.dagger.hiltCompiler)
 
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
